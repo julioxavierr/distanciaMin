@@ -13,33 +13,70 @@ vector<pair<int,int> > adjList[numVertices]; // Lista de adjacencia
 int dis[numVertices]; // Guarda a menor distância
 bool vis[numVertices] = {0}; // Determina quando o nó foi ou não visitado
 
-int shortestPath(int source, int destination);
+int ShortestPath(int source, int destination);
 void Dijkstra(int source, int n);
-void setInitialDistancesToInfinity();
-void fillListWithData();
+void SetInitialDistancesToInfinity();
+void FillListWithData();
+void CamMin();
+void Menu();
+void PresentCidades();
 
 class comparator{
 	public:
 		bool operator()(pair<int, int> &a1, pair<int, int> &a2){
-			a1.second > a2.second;
+			return a1.second > a2.second;
 		}
 };
 
 int main(){
-	fillListWithData();
+	FillListWithData();
 
-	int source, destination;
-	cout << "Digite o índice da cidade de partida e o índice da cidade destino: ";
-	cin >> source >> destination;
-	cout << "MENOR CAMINHO DE " << source << " PARA " << destination << " = " << shortestPath(source, destination) << endl;
+	Menu();
 
 	return 0;
 }
 
+void Menu(){
+	int option;
+
+	cout <<  "1) Verificar caminho mínimo entre duas cidades." << endl
+	<< "2) Encerrar execução do programa." << endl
+	<< "Selecione uma das opções: ";
+
+	cin >> option;
+
+	switch(option){
+		case 1:
+			CamMin();
+			break;
+		case 2:
+			exit(0);
+		default:
+			cout << "\nOPÇÃO INVÁLIDA! TENTE NOVAMENTE.\n" << endl;
+			Menu();
+	}
+
+}
+
+void CamMin(){
+	int source, destination;
+
+	cout << "\n-------------------LISTA DE CIDADES-------------------\n" << endl;
+	PresentCidades();
+
+	cout << "Digite o índice da cidade de partida e o índice da cidade de destino: ";
+	cin >> source >> destination;
+
+	int shortest = ShortestPath(source, destination);
+	cout << "MENOR CAMINHO DE " << source << " PARA " << destination << " = " << shortest << "km" << endl;
+	cout << "\n-------------------------------------------------------\n" << endl;
+	Menu();
+}
+
 void Dijkstra(int source){
 
-	setInitialDistancesToInfinity();
-
+	SetInitialDistancesToInfinity();
+	
 	priority_queue<pair<int,int> ,vector<pair<int,int> >,comparator> pq;
 
 	// Adicionando source (nó de partida) com distancia dele mesmo sendo 0
@@ -68,7 +105,7 @@ void Dijkstra(int source){
 
 }
 
-int shortestPath(int source, int destination){
+int ShortestPath(int source, int destination){
 	Dijkstra(source);
 
 	if(dis[destination] != INFINITY){
@@ -79,13 +116,13 @@ int shortestPath(int source, int destination){
 
 }
 
-void setInitialDistancesToInfinity(){
+void SetInitialDistancesToInfinity(){
 	for(int i = 0; i < numVertices; i++){
 		dis[i] = INFINITY;
 	}
 }
 
-void fillListWithData(){
+void FillListWithData(){
 	FILE *arq; // Arquivo contendo distâncias entre cidades 
 	arq = fopen("./Data/listaCidades.txt", "r");
 
@@ -102,5 +139,26 @@ void fillListWithData(){
 	}
 
 	fclose(arq);
+
+}
+
+void PresentCidades(){
+	FILE *presentationIndices;
+	presentationIndices = fopen("./Data/presentationIndices.txt", "r");
+
+	if(presentationIndices == NULL){
+		cout << "Erro ao abrir lista de cidades" << endl;
+		return;
+	}
+
+	char ch;
+	while(1){
+		ch = fgetc(presentationIndices);
+		if(ch != EOF){
+			cout << ch;
+		}else{
+			break;
+		}
+	}
 
 }
