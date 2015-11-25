@@ -16,6 +16,7 @@ class List {
 public:
 
     List();
+    List(List<T> &src);
     ~List();
     T front();
     T back();
@@ -41,6 +42,17 @@ List<T>::List() {
     this->countNodes = 0;
     this->head = nullptr;
     this->tail = nullptr;
+}
+
+template <typename T>
+List<T>::List(List<T> &src) :
+    List() {
+
+    Node<T> *current = src.getHead();
+    while(current != nullptr) {
+        this->push_front(current->data);
+        current = current->next;
+    }
 }
 
 template <typename T>
