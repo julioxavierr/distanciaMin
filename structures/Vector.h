@@ -30,6 +30,11 @@ class Vector
         return *this;
     }
 
+    Vector(int numElements, Object element) {
+        for(int i = 0; i < numElements; ++i)
+            this->push_back(element);
+    }
+
     void resize(int newSize)
     {
         if(newSize > theCapacity)
