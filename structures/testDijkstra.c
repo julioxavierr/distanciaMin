@@ -35,6 +35,8 @@ int main() {
     // DESTROYING (FREEING) STRUCTURES
     destroyDijkstra(dijkstra);
     destroyGraph(graph);
+    free(dijkstra);
+    free(graph);
 
     return 0;
 }

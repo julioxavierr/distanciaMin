@@ -51,7 +51,7 @@ void printMinDistance(int *minDistance, int size) {
 }
 
 void relaxVertex(Dijkstra *dijkstra, int vertex) {
-    printf("relaxing vertex %d\n", vertex);
+ //   printf("relaxing vertex %d\n", vertex);
     int currentDistance, newDistance, i;
     node *currentNode = dijkstra->graph->adjList[vertex]->head;
     Edge edge;
@@ -59,13 +59,13 @@ void relaxVertex(Dijkstra *dijkstra, int vertex) {
 
     for( ; currentNode != NULL; currentNode = currentNode->next) {
         edge = currentNode->edge;
-        printf("next neighbor = %d\n", edge.to);
+//        printf("next neighbor = %d\n", edge.to);
         if(!dijkstra->visited[edge.to]) {
             currentDistance = dijkstra->minDistance[edge.to];
             newDistance     = dijkstra->minDistance[vertex] +
                               edge.length;
-            printf("currentDistance = %d\n", currentDistance);
-            printf("newDistance = %d\n", newDistance);
+//            printf("currentDistance = %d\n", currentDistance);
+//            printf("newDistance = %d\n", newDistance);
             if(newDistance < currentDistance) {
                 dijkstra->minDistance[edge.to] = newDistance;
             }
@@ -77,8 +77,8 @@ int shortestDistance(Dijkstra *dijkstra, int target) {
     int vertex = -1, distance = -1;
     while(1) {
         findClosestVertexAvailable(dijkstra, &vertex, &distance);
-        printf("currentVertex = %d\n"
-               "distance = %d\n\n", vertex, distance);
+//        printf("currentVertex = %d\n"
+//               "distance = %d\n\n", vertex, distance);
         if(distance == INFINITY)
             break;
         if(vertex == target)

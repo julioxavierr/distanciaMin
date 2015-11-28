@@ -11,8 +11,10 @@ void initGraph(Graph *graph, int numberOfVertex) {
     
     int i;
 
-    for(i = 0; i < numberOfVertex; ++i)
+    for(i = 0; i < numberOfVertex; ++i) {
         graph->adjList[i] = malloc(sizeof(List));
+        initList(graph->adjList[i]);
+    }
 }
 
 void addEdge(Graph *graph, int from, int to, int length) {
