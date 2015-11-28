@@ -56,7 +56,6 @@ void destroyList(List *list) {
         free(temp);
     }
     list->head = NULL;
-    free(list);
 }
 
 void printList(List *list) {
