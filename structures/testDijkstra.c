@@ -3,7 +3,8 @@
 int main() {
 
     // BUILDING THE GRAPH
-    Graph *graph = malloc(sizeof(Graph));
+    Graph *graph;
+    graph = (Graph*) malloc(sizeof(Graph));
     int numberOfVertex = 5;
 
     initGraph(graph, numberOfVertex);
