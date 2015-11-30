@@ -111,6 +111,7 @@ void CamMin(){
 
 void PresentCities(){
 	FILE *presentationIndices;
+	char ch;
 	presentationIndices = fopen("./Data/presentationIndices.txt", "r");
 
 	if(presentationIndices == NULL){
@@ -118,7 +119,6 @@ void PresentCities(){
 		exit(0);
 	}
 
-	char ch;
 	while(1){
 		ch = fgetc(presentationIndices);
 		if(ch != EOF){
